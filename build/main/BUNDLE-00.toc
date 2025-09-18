@@ -1,0 +1,1 @@
+([('main', '/Users/grigoris/pythonProjectOffice/dist/main', 'EXECUTABLE')],)
