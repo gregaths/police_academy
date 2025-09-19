@@ -26,9 +26,8 @@ jobs:
         
     - name: Build executable
       run: |
-         pyinstaller --onefile --windowed --icon=favicon.ico --add-data "*.jpg;." --add-data "*.png;." --add-data "*.ico;." --hidden-import=PyQt5.QtCore --hidden-import=PyQt5.QtGui --hidden-import=PyQt5.QtWidgets --hidden-import=docx --hidden-import=docxtpl main.py
-
-    
+        pyinstaller --onefile --windowed --icon=favicon.ico --add-data "elas.jpg;." --hidden-import=PyQt5.QtCore --hidden-import=PyQt5.QtGui --hidden-import=PyQt5.QtWidgets --hidden-import=docx --hidden-import=docxtpl main.py
+        
     - name: Upload executable
       uses: actions/upload-artifact@v4
       with:
