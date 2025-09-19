@@ -18,10 +18,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyinstaller
         pip install PyQt5
+        pip install python-docx
+        pip install openpyxl
+        pip install pillow
+        pip install requests
         
     - name: Build executable
       run: |
-        pyinstaller --onefile --windowed --icon=favicon.ico --hidden-import=PyQt5.QtCore --hidden-import=PyQt5.QtGui --hidden-import=PyQt5.QtWidgets main.py
+        pyinstaller --onefile --windowed --icon=favicon.ico --hidden-import=PyQt5.QtCore --hidden-import=PyQt5.QtGui --hidden-import=PyQt5.QtWidgets --hidden-import=docx main.py
         
     - name: Upload executable
       uses: actions/upload-artifact@v4
