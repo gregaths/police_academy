@@ -4,6 +4,8 @@ from PyQt5.QtCore import Qt
 from documents import (witness_report, silipsi, deltio_kat, apologia, rights, vas, transmission,
                        mutual,  silipsi_mutual, deltio_kat_mutual, apologia_mutual,  witness_report_adjudication,
                        transmission_adjudication, context)
+import os
+import sys
 
 
 class Sound(QWidget):
@@ -14,9 +16,17 @@ class Sound(QWidget):
 
         main_layout=QHBoxLayout()
 
-        # Left side: Image and programmer info
+        def resource_path(relative_path):
+            try:
+                base_path=sys._MEIPASS
+            except Exception:
+                base_path=os.path.abspath(".")
+            return os.path.join(base_path,relative_path)
+
+            # Left side: Image and programmer info
+
         left_layout=QVBoxLayout()
-        pixmap=QPixmap("elas.jpg")
+        pixmap=QPixmap(resource_path("elas.jpg"))
         if pixmap.isNull() :
             self.image_label=QLabel("Εικόνα elas.jpg δεν βρέθηκε")
         else :

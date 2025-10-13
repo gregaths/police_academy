@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 from start import StartWindow
 from bodily_harm import BodilyHarmWindow
 from biowindow import BioWindow
+import os
 
 
 class MainWindow(QWidget):
@@ -17,10 +18,17 @@ class MainWindow(QWidget):
         # Main layout (horizontal split)
         main_layout = QHBoxLayout()
 
+        def resource_path(relative_path):
+            try:
+                base_path= sys._MEIPASS
+            except Exception :
+                base_path = os.path.abspath(".")
+            return os.path.join(base_path, relative_path)
+
         # Left side: Image and programmer info
         left_layout = QVBoxLayout()
         left_layout.setAlignment(Qt.AlignCenter)
-        pixmap = QPixmap("elas.jpg")
+        pixmap = QPixmap(resource_path("elas.jpg"))
         if pixmap.isNull():
             self.image_label = QLabel("Εικόνα elas.jpg δεν βρέθηκε")
         else:

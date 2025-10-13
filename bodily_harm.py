@@ -4,6 +4,8 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 from documents import (witness_report, iatrodik, silipsi,deltio_kat, apologia, rights, vas, transmission,
                        mutual, iatrodik_mutual, silipsi_mutual, deltio_kat_mutual, apologia_mutual,  context)
+import sys
+import os
 
 
 class BodilyHarmWindow(QWidget):
@@ -14,9 +16,16 @@ class BodilyHarmWindow(QWidget):
 
         main_layout = QHBoxLayout()
 
+        def resource_path(relative_path):
+            try:
+                base_path=sys._MEIPASS
+            except Exception:
+                base_path=os.path.abspath(".")
+            return os.path.join(base_path,relative_path)
+
         # Left side: Image and programmer info
-        left_layout = QVBoxLayout()
-        pixmap = QPixmap("elas.jpg")
+        left_layout=QVBoxLayout()
+        pixmap=QPixmap(resource_path("elas.jpg"))
         if pixmap.isNull():
             self.image_label = QLabel("Εικόνα elas.jpg δεν βρέθηκε")
         else:

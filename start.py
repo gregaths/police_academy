@@ -8,6 +8,8 @@ from courtorder import courtOrder
 from gunlaw import GunPos
 from soundmeter import Sound
 from oblig import Obligation
+import os
+import sys
 
 class StartWindow(QWidget):
     def __init__(self):
@@ -18,10 +20,18 @@ class StartWindow(QWidget):
         # Main layout (horizontal split)
         main_layout = QHBoxLayout()
 
+        def resource_path(relative_path):
+            try:
+                base_path= sys._MEIPASS
+            except Exception :
+                base_path = os.path.abspath(".")
+            return os.path.join(base_path, relative_path)
+
+
         # Left side: Same as main window
         left_layout = QVBoxLayout()
         left_layout.setAlignment(Qt.AlignCenter)
-        pixmap = QPixmap("elas.jpg")
+        pixmap = QPixmap(resource_path("elas.jpg"))
         if pixmap.isNull():
             self.image_label = QLabel("Εικόνα elas.jpg δεν βρέθηκε")
         else:
