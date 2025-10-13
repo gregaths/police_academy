@@ -139,7 +139,7 @@ class Case1Window(QWidget):
             ("prosecution" ,"Επιθυμείς την ποινική δίωξη του δράστη?"),
             ("hourOfReportFinished" ,"Τι ώρα τελείωσε η έκθεση μάρτυρα?") ,
             ("protocolnumber" ,"Αριθμός πρωτοκόλλου?") ,
-            ("placeOfHurt" ,"Πώς και πού προκλήθηκαν οι σωματικές βλάβες?") ,
+            ("placeOfHurt" ,"Πώς και πού προκλήθηκαν οι σωματικές βλάβες?")
 
         ]
         for key, label in fields:

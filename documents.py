@@ -1666,3 +1666,408 @@ def generate_all():
     transmission()
 
 
+def witness_reportOfficerWeapon():
+    global context
+    doc = Document()
+    title = doc.add_heading('ΕΚΘΕΣΗ ΕΝΟΡΚΗΣ ΕΞΕΤΑΣΗΣ (ΑΣΤΥΝΟΜΙΚΟΥ)', level=0)
+    title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    main_paragraph = doc.add_paragraph()
+    main_paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    main_paragraph.add_run(
+        '    Στην {{place}} σήμερα την {{date_num}} του μήνα {{month}} του έτους {{year}} ημέρα εβδομάδας '
+        '{{day}} και ώρα {{hour}} ενώπιον εμού του {{first_officer}} του {{policeStation}} '
+        'Θεσσαλονίκης, παρισταμένου και της {{sec_officer}} της ιδίας υπηρεσίας, που προσλήφθηκε '
+        'ως Β\' Ανακριτικός Υπάλληλος, εμφανίστηκε ο κατωτέρω μάρτυρας, ο οποίος αφού ρωτήθηκε για την ταυτότητα '
+        'του κ.λ.π. απάντησε ότι ονομάζεται: {{surname}} {{name}} του {{fathername}} και της {{mothername}} γεν. '
+        '{{dateOfBirth}} στη {{placeOfBirth}} κατ. {{address}}, αριθμός τηλεφώνου {{tel}}, ηλεκτρονικό '
+        'ταχυδρομείο {{email}}, κάτοχος του υπ αριθμόν {{DAT}} που εκδόθηκε την {{issued}} από {{place_issued}} '
+        'Α.Φ.Μ : {{afm}}, Δ.Ο.Υ : {{doy}}'
+    )
+    new_para1 = doc.add_paragraph("   Έπειτα ο εξεταζόμενος έδωσε τον προβλεπόμενο από τα άρθρα 219 και 220 παρ. 1 "
+                                  " του Κώδικα Ποινικής Δικονομίας όρκο, ως ακολούθως: «Δηλώνω, επικαλούμενος την "
+                                  "τιμή και την συνείδηση μου, ότι θα πω όλη την αλήθεια και μόνο την αλήθεια, χωρίς"
+                                  " να προσθέσω ούτε να αποκρύψω τίποτα», και στην συνέχεια εξετάσθηκε ως εξής:.")
+    new_para1.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para2 = doc.add_paragraph("ΕΡΩΤΗΣΗ: Ρωτήθηκε σχετικά:")
+    new_para2.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para3 = doc.add_paragraph(
+        "ΑΠΟΚΡΙΣΗ: Είμαι Αστυνομικός και υπηρετώ στο {{department}}. Στις {{ dateOfService}} βρισκόμουν σε "
+        "διατεταγμένη Υπηρεσία {{kindOfService}} κατά τις ώρες {{hourOfService}}. Περί ώρα {{hourOfControl}}"
+        "την {{dateOfControl}} ενώ βρισκόμασυταν με το περιπολικό στην περιοχή {{areaOfControl}} επί της οδού"
+        "{{addressOfControl}} σταματήσαμε το υπ' αριθμόν {{vehicleNumber}} {{typeOfVehicle}}, μάρκας {{brand}}"
+        " ιδιοκτησίας "
+        "{{surnamePerperator}} {{namePerperator}} του {{fathernamePerperator}} και της {{mothernamePerperator}}"
+        "γεν. {{dateOfBirthPerperator}} στη {{placeOfBirthPerperator}} κατ.{{addressPerperator}},αριθμός τηλεφώνου "
+        "{{telPreperator}}, ηλεκτρονικό ταχυδρομείου{{emailPreperator}},κάτοχος του υπ αριθμόν {{DATperperator}}"
+        " που εκδόθηκε την {{issuedPerperator}} από {{place_issuedPerperator}} Α.Φ.Μ : {{afmPreperator}}, Δ.Ο.Υ : "
+        "{{doyPrep}} όπου κατά τον έλεγχο του οχήματος διαπιστώσαμε να έχει στo {{placeOfWeapon}} {{weapon}}. Ανωτέρω"
+        " δράστης συνελήφθη, το παράνομο αντικείμενο κατασχέθηκε και οδηγήθηκε στο {{departmentOfDuty}}."
+        "Τίποτε άλλο δεν έχω να προσθέσω και υπογράφω,")
+    new_para3.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para4 = doc.add_paragraph("Η παρούσα έκθεση άρχισε να συντάσσεται την {{hour}} ώρα και περαιώθηκε την "
+                                  "{{hourOfReportFinished}} ώρα. Για πίστωση συντάχθηκε η παρούσα έκθεση η οποία αφού"
+                                  "αναγνώσθηκε και βεβαιώθηκε, υπογράφεται ως ακολούθως:")
+    new_para4.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para5 = doc.add_paragraph("  Ο Εξετασθείς                       Ο Β Ανακριτικός Υπάλληλος       "
+                                  "         Ο   Ανακριτικός Υπάλληλος")
+    new_para5.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    doc.save('sample_document.docx')
+    template = DocxTemplate("sample_document.docx")
+    template.render(context)
+    template.save("ΕνορκηΠερίΌπλων.docx")
+
+
+def weapon_seizure():
+    global context
+    doc=Document()
+    title=doc.add_heading('ΕΚΘΕΣΗ ΠΑΡΑΔΟΣΕΩΣ ΚΑΙ ΚΑΤΑΣΧΕΣΕΩΣ', level = 0)
+    title.alignment=WD_ALIGN_PARAGRAPH.CENTER
+    main_paragraph=doc.add_paragraph()
+    main_paragraph.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    main_paragraph.add_run( 'Στην {{place}} σήμερα την {{date_num}} του μήνα {{month}} του έτους {{year}}'
+                            ' ημέρα εβδομάδας {{day}} και ώρα {{hourSeizure}} ενώπιον εμού του {{first_officer}} '
+                            'του {{policeStation}} Θεσσαλονίκης, παρισταμένου και της {{sec_officer}} της '
+                            'ιδίας υπηρεσίας, που προσλήφθηκε ως Β\' Ανακριτικός Υπάλληλος, επειδή ενεργούμε '
+                            'προανάκριση για παράβαση του άρθρου 1 του Ν.2168/1993 ως αντικ. '
+                            'με άρθρο 1 του Ν.4678/2020  (Περί όπλων) προβήκαμε στην κατάσχεσή του κάτωθι: '
+                            '{{weapon}} που μας παρέδωσε ο/η {{surname}} {{name}} του {{fathername}} και της'
+                            ' {{mothername}} γεν. {{dateOfBirth}} στη {{placeOfBirth}} κατ. {{address}}, αριθμός '
+                            'τηλεφώνου {{tel}}, ηλεκτρονικό ταχυδρομείο {{email}}, κάτοχος του υπ αριθμόν {{DAT}} '
+                            'που εκδόθηκε την {{issued}} από {{place_issued}} Α.Φ.Μ : {{afm}}, Δ.Ο.Υ : {{doy}}'
+                            'το/τα οποίο/α βρέθηκαν στην κατοχή του/της {{surnamePerperator}} {{namePerperator}} του '
+                            '{{fathernamePerperator}} και της {{mothernamePerperator}} γεν. {{dateOfBirthPerperator}} '
+                            'στη {{placeOfBirthPerperator}} κατ.{{addressPerperator}},αριθμός τηλεφώνου '
+                            '{{telPreperator}}, ηλεκτρονικό ταχυδρομείου {{emailPreperator}},κάτοχος του υπ αριθμόν '
+                            '{{DATperperator}} που εκδόθηκε την {{issuedPerperator}} από {{place_issuedPerperator}} '
+                            'Α.Φ.Μ : {{afmPreperator}}, Δ.Ο.Υ : {{doyPrep}}, ύστερα από γενόμενο  αστυνομικό έλεγχο'
+                            ' που ενεργήθηκε στις {{hourOfControl}} της {{dateOfControl}} στην περιοχή '
+                            '{{areaOfControl}} επί της οδού {addressOfControl}}. Ανωτέρω αντικείμενο/α βρέθηκαν στο '
+                            '{{placeOfWeapon}} στο υπ\' αριθμόν {{vehicleNumber}} {{typeOfVehicle}}, μάρκας {{brand}} '
+                            'ιδιοκτησίας του'
+                            'ανωτέρω.'
+                            )
+    new_para1=doc.add_paragraph("Η παρούσα έκθεση άρχισε να συντάσσεται την {{hourSeizure}} ώρα και περαιώθηκε την "
+                                "{{hourOfSeizureFinished}} ώρα. Για πίστωση συντάχθηκε η παρούσα έκθεση η οποία "
+                                "αφού αναγνώσθηκε και βεβαιώθηκε, υπογράφεται ως ακολούθως:")
+    new_para1.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para5=doc.add_paragraph("  Ο Εξετασθείς                       Ο Β Ανακριτικός Υπάλληλος       "
+                                "         Ο   Ανακριτικός Υπάλληλος")
+    new_para5.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
+    doc.save('sample_document.docx')
+    template=DocxTemplate("sample_document.docx")
+    template.render(context)
+    template.save("Εκθεση_Κατασχεσης.docx")
+
+
+
+def witness_report_adjudication():
+    global context
+    doc = Document()
+    title = doc.add_heading('ΕΚΘΕΣΗ ΕΝΟΡΚΗΣ ΕΞΕΤΑΣΗΣ', level=0)
+    title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    main_paragraph = doc.add_paragraph()
+    main_paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    main_paragraph.add_run(
+        '    Στην {{place}} σήμερα την {{date_num}} του μήνα {{month}} του έτους {{year}} ημέρα εβδομάδας '
+        '{{day}} και ώρα {{hour}} ενώπιον εμού του {{first_officer}} του {{policeStation}} '
+        'Θεσσαλονίκης, παρισταμένου και της {{sec_officer}} της ιδίας υπηρεσίας, που προσλήφθηκε '
+        'ως Β\' Ανακριτικός Υπάλληλος, εμφανίστηκε ο κατωτέρω μάρτυρας, ο οποίος αφού ρωτήθηκε για την ταυτότητα '
+        'του κ.λ.π. απάντησε ότι ονομάζεται: {{surname}} {{name}} του {{fathername}} και της {{mothername}} γεν. '
+        '{{dateOfBirth}} στη {{placeOfBirth}} κατ. {{address}}, αριθμός τηλεφώνου {{tel}}, ηλεκτρονικό '
+        'ταχυδρομείο {{email}}, κάτοχος του υπ αριθμόν {{DAT}} που εκδόθηκε την {{issued}} από {{place_issued}} '
+        'Α.Φ.Μ : {{afm}}, Δ.Ο.Υ : {{doy}}'
+    )
+    new_para1 = doc.add_paragraph("   Έπειτα ο εξεταζόμενος έδωσε τον προβλεπόμενο από τα άρθρα 219 και 220 παρ. 1 "
+                                  " του Κώδικα Ποινικής Δικονομίας όρκο, ως ακολούθως: «Δηλώνω, επικαλούμενος την "
+                                  "τιμή και την συνείδηση μου, ότι θα πω όλη την αλήθεια και μόνο την αλήθεια, χωρίς"
+                                  " να προσθέσω ούτε να αποκρύψω τίποτα», και στην συνέχεια εξετάσθηκε ως εξής:.")
+    new_para1.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para2 = doc.add_paragraph("ΕΡΩΤΗΣΗ: Ρωτήθηκε σχετικά:")
+    new_para2.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para3 = doc.add_paragraph(
+        "ΑΠΟΚΡΙΣΗ: Είμαι μόνιμος κάτοικος {{address}}. Από τις {{dateOfSeparation}} έχουμε χωρίσει με τον πρώην σύζυγο "
+        "μου {{surnamePerperator}} {{namePerperator}} του {{fathernamePerperator}} και της {{mothernamePerperator}}"
+        "γεν. {{dateOfBirthPerperator}} στη {{placeOfBirthPerperator}} κατ.{{addressPerperator}},αριθμός τηλεφώνου "
+        "{{telPreperator}}, ηλεκτρονικό ταχυδρομείου{{emailPreperator}},κάτοχος του υπ αριθμόν {{DATperperator}}"
+        " που εκδόθηκε την {{issuedPerperator}} από {{place_issuedPerperator}} Α.Φ.Μ : {{afmPreperator}}, Δ.Ο.Υ : "
+        "{{doyPrep}} με τον οποίο έχω αποστήσει {{numberOfChildren}} {{nameOfChildren}}. Συνέπεια αυτού έχει συνταχθεί"
+        "η υπ' αριθμόν {{numberOfAdjudication}} από {{dateOfAdjudication}} {{nameOfAdjudication}} όπου προβλέπει"
+        "{{Adjudication}}. Στις {{dateOfCrime}} και περί ώρα {{hourOfCrime}} στη {{placeOfCrime}} ο πρώην σύζυγος μου"
+        "παραβίασε την ανωτέρω δικαστική απόφαση {{whathappened}}.{{add_something}} Επιθυμώ την ποινική του δίωξη και"
+        " σας εγχειρίζω την απόφαση.Τίποτε άλλο δεν έχω να προσθέσω και υπογράφω,")
+    new_para3.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para4 = doc.add_paragraph("Η παρούσα έκθεση άρχισε να συντάσσεται την {{hour}} ώρα και περαιώθηκε την "
+                                  "{{hourOfReportFinished}} ώρα. Για πίστωση συντάχθηκε η παρούσα έκθεση η οποία αφού"
+                                  "αναγνώσθηκε και βεβαιώθηκε, υπογράφεται ως ακολούθως:")
+    new_para4.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para5 = doc.add_paragraph("  Ο Εξετασθείς                       Ο Β Ανακριτικός Υπάλληλος       "
+                                  "         Ο   Ανακριτικός Υπάλληλος")
+    new_para5.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    doc.save('sample_document.docx')
+    template = DocxTemplate("sample_document.docx")
+    template.render(context)
+    template.save("ΕνορκηΠαραβίαση Δικαστικής.docx")
+
+
+def transmission_adjudication():
+    global context  # Declare we're using the global context
+    # Δημιουργία εγγράφου
+    doc = Document()
+
+    # Δημιουργία πίνακα με 1 γραμμή και 2 κελιά (για αριστερά & δεξιά κείμενο)
+    table = doc.add_table(rows = 1,cols = 2)
+    table.autofit = False  # Απενεργοποίηση αυτόματου προσαρμογής πλάτους
+
+    # Ορισμός πλάτους στηλών (50% - 50%)
+    col_widths = [Inches(3),Inches(3)]
+    for i, width in enumerate(col_widths):
+        table.columns[i].width = width
+
+    # Κελί 1 (Αριστερά) - "ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ"
+    left_cell = table.cell(0, 0)
+    left_texts = [
+        "ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ",
+        "ΕΛΛΗΝΙΚΗ ΑΣΤΥΝΟΜΙΑ",
+        "ΔΙΕΥΘ. ΑΣΤ. ΘΕΣΣΑΛΟΝΙΚΗΣ",
+        "ΑΣΤΥΝΟΜΙΚΟ ΤΜΗΜΑ ΘΕΡΜΗΣ",
+        "ΤΗΛ:2310461203",
+        "email: atthermis@astynomia.gr",
+        "Αρμόδιος:{{first_officer }}",
+        "Αρ.πρωτ: {{ protocolnumber }}"
+    ]
+
+    for text in left_texts:
+        p = left_cell.add_paragraph()
+        run = p.add_run(text)
+        run.bold = True
+        run.font.size = Pt(10)  # γραμματοσειρά (12pt)
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        p.paragraph_format.space_after = Pt(4)
+
+    # Κελί 2 (Δεξιά) - Τοποθεσία, ημερομηνία + επιπλέον κείμενο
+    right_cell = table.cell ( 0 ,1 )
+
+    # Γραμμή 1: Τοποθεσία & Ημερομηνία
+    right_para1 = right_cell.add_paragraph ( )
+    right_run1 = right_para1.add_run ( f"Θέρμη, {datetime.now ( ).strftime ( '%d/%m/%Y' )}" )
+    right_run1.font.size = Pt ( 12 )  # γραμματοσειρά (12pt)
+    right_para1.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+    # Γραμμή 2: "Π Ρ Ο Σ" (με κενά)
+    right_para2 = right_cell.add_paragraph ( )
+    right_run2 = right_para2.add_run ( " Π Ρ Ο Σ" )
+    right_run2.font.size = Pt ( 12 )  # γραμματοσειρά (12pt)
+    right_para2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    # Γραμμή 3: Εργαστήριο & Πανεπιστήμιο
+    right_para3 = right_cell.add_paragraph ( )
+    right_run3 = right_para3.add_run (
+        "ΕΙΣΑΓΓΕΛΙΑ ΠΛΗΜ/ΚΩΝ \nΘΕΣΣΑΛΟΝΙΚΗΣ\n" )
+    right_run3.font.size = Pt ( 12 )  # γραμματοσειρά (12pt)
+    right_para3.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    doc.add_paragraph ( ).add_run ( ).add_break ( )  # Κενή γραμμή πριν το ΘΕΜΑ
+
+    p_theme = doc.add_paragraph ( )
+    run_theme = p_theme.add_run ( "ΘΕΜΑ: «Αποστολή Συνοδείας»" )
+    run_theme.bold = True
+    run_theme.font.size = Pt ( 14 )  # γραμματοσειρά (14pt)
+    p_theme.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_theme.paragraph_format.space_before = Pt ( 16 )  # Επιπλέον κενό πριν
+
+    main_theme = doc.add_paragraph ( )
+    run1_theme = main_theme.add_run ( ' Υποβάλλεται συννημένα δικογραφία που σχηματίσθηκε στην Υπηρεσία μας και αφορά  '
+                                      'την υποβολή έγκλησης της  {{surname}} {{name}} του {{fathername}} και της '
+                                      '{{mothername}} γεν.{{dateOfBirth}} στη {{placeOfBirth}} κατ.{{address}}, αριθμός'
+                                      'τηλεφώνου {{tel}}, ηλεκτρονικό ταχυδρομείο {{email}}, κάτοχος του υπ αριθμόν '
+                                      '{{DAT}} που εκδόθηκε την {{issued}} από {{place_issued}} Α.Φ.Μ : {{afm}}, Δ.Ο.Υ '
+                                      ': {{doy}} εις βάρος του {surnamePerperator}} {{namePerperator}} του '
+                                      '{{fathernamePerperator}} και της {{mothernamePerperator}}'
+                                      'γεν. {{dateOfBirthPerperator }} στη {{placeOfBirthPerperator }} κατ.{'
+                                      '{ addressPerperator }},αριθμός τηλεφώνου {{ telPreperator }}, ηλεκτρονικό '
+                                      'ταχυδρομείου{{ emailPreperator }}, κάτοχος του υπ αριθμόν {{ DATperperator}} που'
+                                      ' εκδόθηκε την {{ issuedPerperator }} από {{place_issuedPerperator}} Α.Φ.Μ : '
+                                      '{{afmPreperator}}, Δ.Ο.Υ : {{ doyPrep }}, για παράβαση του/των άρθρου/ων '
+                                      '{{offences}} πράξη/εις που έλαβαν χώρα  στη {{placeOfCrime}} στις '
+                                      '{{ dateOfCrime}} και περί ώρα {{ hourOfCrime }}.\n' 
+                                      '\tΣυγκεκριμένα ανωτέρω τόπο και χρόνο δράστης παραβίασε την υπ αριθμόν'
+                                      '{{numberOfAdjudication}} από {{dateOfAdjudication}} {{nameOfAdjudication}} όπου '
+                                      'προβλέπει {{Adjudication}}'
+                                      )
+    run1_theme.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY  # Εδώ ορίζουμε την πλήρη στοίχιση
+
+    footer_para = doc.add_paragraph ( )
+    footer_para.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    # Προσθήκη κειμένου με ακριβή θέση (χρήση tabs)
+    footer_run = footer_para.add_run ( )
+    footer_run.add_text(f"\t\tΘέρμη, {datetime.now ( ).strftime ( '%d/%m/%Y' )}" )
+    footer_run.add_text("\t\t\tΟ\t\t\n")  # 5 tabs για στοίχιση
+    footer_run.add_text("\t\t\t\t\tΑνακριτικός Υπάλληλος\n\n")
+    footer_run.add_text("\t\t\t\t\t {{ first_officer }}\n")
+
+    # Αποθήκευση
+    doc.save('sample_transmission.docx')
+    # Επεξεργασία και τελική αποθήκευση
+    template = DocxTemplate ('sample_transmission.docx')
+    template.render(context)
+    template.save("ΔΙΑΒΙΒΑΣΤΙΚΟ_παραβίαση_δικαστικης.docx")
+    # Αποθήκευση του εγγράφου
+
+
+
+def transmission_gunpos():
+    global context  # Declare we're using the global context
+    # Δημιουργία εγγράφου
+    doc = Document()
+
+    # Δημιουργία πίνακα με 1 γραμμή και 2 κελιά (για αριστερά & δεξιά κείμενο)
+    table = doc.add_table(rows = 1,cols = 2)
+    table.autofit = False  # Απενεργοποίηση αυτόματου προσαρμογής πλάτους
+
+    # Ορισμός πλάτους στηλών (50% - 50%)
+    col_widths = [Inches(3),Inches(3)]
+    for i, width in enumerate(col_widths):
+        table.columns[i].width = width
+
+    # Κελί 1 (Αριστερά) - "ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ"
+    left_cell = table.cell(0, 0)
+    left_texts = [
+        "ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ",
+        "ΕΛΛΗΝΙΚΗ ΑΣΤΥΝΟΜΙΑ",
+        "ΔΙΕΥΘ. ΑΣΤ. ΘΕΣΣΑΛΟΝΙΚΗΣ",
+        "ΑΣΤΥΝΟΜΙΚΟ ΤΜΗΜΑ ΘΕΡΜΗΣ",
+        "ΤΗΛ:2310461203",
+        "email: atthermis@astynomia.gr",
+        "Αρμόδιος:{{first_officer }}",
+        "Αρ.πρωτ: {{ protocolnumber }}"
+    ]
+
+    for text in left_texts:
+        p = left_cell.add_paragraph()
+        run = p.add_run(text)
+        run.bold = True
+        run.font.size = Pt(10)  # γραμματοσειρά (12pt)
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        p.paragraph_format.space_after = Pt(4)
+
+    # Κελί 2 (Δεξιά) - Τοποθεσία, ημερομηνία + επιπλέον κείμενο
+    right_cell = table.cell ( 0 ,1 )
+
+    # Γραμμή 1: Τοποθεσία & Ημερομηνία
+    right_para1 = right_cell.add_paragraph ( )
+    right_run1 = right_para1.add_run ( f"Θέρμη, {datetime.now ( ).strftime ( '%d/%m/%Y' )}" )
+    right_run1.font.size = Pt ( 12 )  # γραμματοσειρά (12pt)
+    right_para1.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+    # Γραμμή 2: "Π Ρ Ο Σ" (με κενά)
+    right_para2 = right_cell.add_paragraph ( )
+    right_run2 = right_para2.add_run ( " Π Ρ Ο Σ" )
+    right_run2.font.size = Pt ( 12 )  # γραμματοσειρά (12pt)
+    right_para2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    # Γραμμή 3: Εργαστήριο & Πανεπιστήμιο
+    right_para3 = right_cell.add_paragraph ( )
+    right_run3 = right_para3.add_run (
+        "ΕΙΣΑΓΓΕΛΙΑ ΠΛΗΜ/ΚΩΝ \nΘΕΣΣΑΛΟΝΙΚΗΣ\n" )
+    right_run3.font.size = Pt ( 12 )  # γραμματοσειρά (12pt)
+    right_para3.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    doc.add_paragraph ( ).add_run ( ).add_break ( )  # Κενή γραμμή πριν το ΘΕΜΑ
+
+    p_theme = doc.add_paragraph ( )
+    run_theme = p_theme.add_run ( "ΘΕΜΑ: «Αποστολή Συνοδείας»" )
+    run_theme.bold = True
+    run_theme.font.size = Pt ( 14 )  # γραμματοσειρά (14pt)
+    p_theme.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_theme.paragraph_format.space_before = Pt ( 16 )  # Επιπλέον κενό πριν
+
+    main_theme = doc.add_paragraph ( )
+    run1_theme = main_theme.add_run ( ' Υποβάλλεται συννημένα δικογραφία που σχηματίσθηκε στην Υπηρεσία μας και αφορά  '
+                                      'την υποβολή έγκλησης της  {{surname}} {{name}} του {{fathername}} και της '
+                                      '{{mothername}} γεν.{{dateOfBirth}} στη {{placeOfBirth}} κατ.{{address}}, αριθμός'
+                                      'τηλεφώνου {{tel}}, ηλεκτρονικό ταχυδρομείο {{email}}, κάτοχος του υπ αριθμόν '
+                                      '{{DAT}} που εκδόθηκε την {{issued}} από {{place_issued}} Α.Φ.Μ : {{afm}}, Δ.Ο.Υ '
+                                      ': {{doy}} εις βάρος του {surnamePerperator}} {{namePerperator}} του '
+                                      '{{fathernamePerperator}} και της {{mothernamePerperator}}'
+                                      'γεν. {{dateOfBirthPerperator }} στη {{placeOfBirthPerperator }} κατ.{'
+                                      '{ addressPerperator }},αριθμός τηλεφώνου {{ telPreperator }}, ηλεκτρονικό '
+                                      'ταχυδρομείου{{ emailPreperator }}, κάτοχος του υπ αριθμόν {{ DATperperator}} που'
+                                      ' εκδόθηκε την {{ issuedPerperator }} από {{place_issuedPerperator}} Α.Φ.Μ : '
+                                      '{{afmPreperator}}, Δ.Ο.Υ : {{ doyPrep }}, για παράβαση της Νομοθεσία Περί Όπλων '
+                                      'και Εκρηκτικών - 2168/93'
+                                      ' πράξη/εις που έλαβαν χώρα  στη {{areaOfControl}} στις '
+                                      '{{dateOfControl}} και περί ώρα {{ hourOfControl }}.\n' 
+                                      '\tΣυγκεκριμένα ανωτέρω τόπο και χρόνο δράστης διαπιστώθηκε ύστερα από Αστυνομικό'
+                                      'έλεγχο που διενεργήθηκε στο υπ αριθμόν {{vehicleNumber}} {{typeOfVehicle}} ' 
+                                      'μάρκας {{brand}} ιδιοκτησίας του, να κατέχει εντός αυτού και συγκεκριμένα στο'
+                                      '{{placeOfWeapon}} {{weapon}}. Ανωτέρω αντικείμενο κατασχέθηκε.'
+                                      '  Παρακαλούμε για τις δικές σας ενέργειες.'
+
+                                      )
+    run1_theme.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY  # Εδώ ορίζουμε την πλήρη στοίχιση
+
+    footer_para = doc.add_paragraph ( )
+    footer_para.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    # Προσθήκη κειμένου με ακριβή θέση (χρήση tabs)
+    footer_run = footer_para.add_run ( )
+    footer_run.add_text(f"\t\tΘέρμη, {datetime.now ( ).strftime ( '%d/%m/%Y' )}" )
+    footer_run.add_text("\t\t\tΟ\t\t\n")  # 5 tabs για στοίχιση
+    footer_run.add_text("\t\t\t\t\tΑνακριτικός Υπάλληλος\n\n")
+    footer_run.add_text("\t\t\t\t\t {{ first_officer }}\n")
+
+    # Αποθήκευση
+    doc.save('sample_transmission.docx')
+    # Επεξεργασία και τελική αποθήκευση
+    template = DocxTemplate ('sample_transmission.docx')
+    template.render(context)
+    template.save("ΔΙΑΒΙΒΑΣΤΙΚΟ_περι_όπλων.docx")
+    # Αποθήκευση του εγγράφου
+
+
+def witness_report_oblig():
+    global context
+    doc = Document()
+    title = doc.add_heading('ΕΚΘΕΣΗ ΕΝΟΡΚΗΣ ΕΞΕΤΑΣΗΣ', level=0)
+    title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    main_paragraph = doc.add_paragraph()
+    main_paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    main_paragraph.add_run(
+        '    Στην {{place}} σήμερα την {{date_num}} του μήνα {{month}} του έτους {{year}} ημέρα εβδομάδας '
+        '{{day}} και ώρα {{hour}} ενώπιον εμού του {{first_officer}} του {{policeStation}} '
+        'Θεσσαλονίκης, παρισταμένου και της {{sec_officer}} της ιδίας υπηρεσίας, που προσλήφθηκε '
+        'ως Β\' Ανακριτικός Υπάλληλος, εμφανίστηκε ο κατωτέρω μάρτυρας, ο οποίος αφού ρωτήθηκε για την ταυτότητα '
+        'του κ.λ.π. απάντησε ότι ονομάζεται: {{surname}} {{name}} του {{fathername}} και της {{mothername}} γεν. '
+        '{{dateOfBirth}} στη {{placeOfBirth}} κατ. {{address}}, αριθμός τηλεφώνου {{tel}}, ηλεκτρονικό '
+        'ταχυδρομείο {{email}}, κάτοχος του υπ αριθμόν {{DAT}} που εκδόθηκε την {{issued}} από {{place_issued}} '
+        'Α.Φ.Μ : {{afm}}, Δ.Ο.Υ : {{doy}}'
+    )
+    new_para1 = doc.add_paragraph("   Έπειτα ο εξεταζόμενος έδωσε τον προβλεπόμενο από τα άρθρα 219 και 220 παρ. 1 "
+                                  " του Κώδικα Ποινικής Δικονομίας όρκο, ως ακολούθως: «Δηλώνω, επικαλούμενος την "
+                                  "τιμή και την συνείδηση μου, ότι θα πω όλη την αλήθεια και μόνο την αλήθεια, χωρίς"
+                                  " να προσθέσω ούτε να αποκρύψω τίποτα», και στην συνέχεια εξετάσθηκε ως εξής:.")
+    new_para1.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para2 = doc.add_paragraph("ΕΡΩΤΗΣΗ: Ρωτήθηκε σχετικά:")
+    new_para2.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para3 = doc.add_paragraph(
+        "ΑΠΟΚΡΙΣΗ: Είμαι μόνιμος κάτοικος {{address}}. Από τις {{dateOfSeparation}} έχουμε χωρίσει με τον πρώην σύζυγο "
+        "μου {{surnamePerperator}} {{namePerperator}} του {{fathernamePerperator}} και της {{mothernamePerperator}}"
+        "γεν. {{dateOfBirthPerperator}} στη {{placeOfBirthPerperator}} κατ.{{addressPerperator}},αριθμός τηλεφώνου "
+        "{{telPreperator}}, ηλεκτρονικό ταχυδρομείου{{emailPreperator}},κάτοχος του υπ αριθμόν {{DATperperator}}"
+        " που εκδόθηκε την {{issuedPerperator}} από {{place_issuedPerperator}} Α.Φ.Μ : {{afmPreperator}}, Δ.Ο.Υ : "
+        "{{doyPrep}} με τον οποίο έχω αποστήσει {{numberOfChildren}} {{nameOfChildren}}. Συνέπεια αυτού έχει συνταχθεί"
+        "η υπ' αριθμόν {{numberOfAdjudication}} από {{dateOfAdjudication}} {{nameOfAdjudication}} όπου προβλέπει"
+        "{{obligation}}. Στις {{dateOfCrime}} και περί ώρα {{hourOfCrime}} στη {{placeOfCrime}} ο πρώην σύζυγος μου"
+        "παραβίασε την ανωτέρω δικαστική απόφαση {{whathappened}}.{{add_something}} Επιθυμώ την ποινική του δίωξη και"
+        " σας εγχειρίζω την απόφαση.Τίποτε άλλο δεν έχω να προσθέσω και υπογράφω,")
+    new_para3.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para4 = doc.add_paragraph("Η παρούσα έκθεση άρχισε να συντάσσεται την {{hour}} ώρα και περαιώθηκε την "
+                                  "{{hourOfReportFinished}} ώρα. Για πίστωση συντάχθηκε η παρούσα έκθεση η οποία αφού"
+                                  "αναγνώσθηκε και βεβαιώθηκε, υπογράφεται ως ακολούθως:")
+    new_para4.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    new_para5 = doc.add_paragraph("  Ο Εξετασθείς                       Ο Β Ανακριτικός Υπάλληλος       "
+                                  "         Ο   Ανακριτικός Υπάλληλος")
+    new_para5.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    doc.save('sample_document.docx')
+    template = DocxTemplate("sample_document.docx")
+    template.render(context)
+    template.save("ΕνορκηΠαραβίαση Δικαστικής.docx")
+
+

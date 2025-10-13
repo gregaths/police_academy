@@ -4,7 +4,10 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 from bodily_harm import BodilyHarmWindow
 from domesticvio import DomesticVioWindow
-
+from courtorder import courtOrder
+from gunlaw import GunPos
+from soundmeter import Sound
+from oblig import Obligation
 
 class StartWindow(QWidget):
     def __init__(self):
@@ -40,21 +43,30 @@ class StartWindow(QWidget):
         buttons = [
             "1. Σωματικές Βλάβες",
             "2. Ενδοοικογενειακή Βία",
-            "3. Εργατικά Ατυχήματα",
+            "3. Αυτόφωρο ηχομέτρησης",
             "4. Νόμος Περί Όπλων",
             "5. Παραβίαση Δικαστικής Απόφασης",
-            "6. Παραβίαση Υποχρεώσεων Διαρρήκτη",
-            "7. Ατμόπλοιο-Αυτοκίνητα",
-            "8. Certificates",
-            "9. Αυτόφωρο ηχομέτρησης",
+            "6. Παραβίαση Υποχρέωσης Διατροφής",
+            "7. Μήνυση Ιδιώτη",
+            "8. Άρθρα Ποινικού Κώδικα",
+            "9. Μήνυση για δάγκωμα σκύλου",
             "10. Παράνομη είσοδος Αλλοδαπών"
         ]
         for button_text in buttons:
             button = QPushButton(button_text)
+            button.setFixedSize(280, 60)
             if button_text == "1. Σωματικές Βλάβες":
                 button.clicked.connect(self.open_bodily_harm)
             elif button_text == "2. Ενδοοικογενειακή Βία":
                 button.clicked.connect(self.open_domesticvio)
+            elif button_text == "3. Αυτόφωρο ηχομέτρησης":
+                button.clicked.connect(self.open_sound)
+            elif button_text == "4. Νόμος Περί Όπλων":
+                button.clicked.connect(self.open_gunpos)
+            elif button_text == "5. Παραβίαση Δικαστικής Απόφασης":
+                button.clicked.connect(self.open_courtordervio)
+            elif button_text == "6. Παραβίαση Υποχρέωσης Διατροφής":
+                button.clicked.connect(self.open_oblig)
             right_layout.addWidget(button)
 
         main_layout.addLayout(right_layout, 1)
@@ -68,6 +80,26 @@ class StartWindow(QWidget):
     def open_domesticvio(self):
         self.domestic_window = DomesticVioWindow()
         self.domestic_window.show()
+        self.hide()
+
+    def open_sound(self):
+        self.sound_window = Sound()
+        self.sound_window.show()
+        self.hide()
+
+    def open_courtordervio(self):
+        self.courtorder_window = courtOrder()
+        self.courtorder_window.show()
+        self.hide()
+
+    def open_gunpos(self):
+        self.gunpos_window = GunPos()
+        self.gunpos_window.show()
+        self.hide()
+
+    def open_oblig(self):
+        self.oblig_window = Obligation()
+        self.oblig_window.show()
         self.hide()
 
 
