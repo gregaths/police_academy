@@ -10,8 +10,9 @@ import sys
 
 
 class GunPos(QWidget):
-    def __init__(self) :
+    def __init__(self, parent_window=None):
         super().__init__()
+        self.parent_window = parent_window
         self.setWindowTitle("Κατοχή όπλου")
         self.setGeometry(100, 100, 800, 600)
 
@@ -34,7 +35,7 @@ class GunPos(QWidget):
             self.image_label.setPixmap(pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         left_layout.addWidget(self.image_label)
         programmer_info=QLabel(
-            "<center>Program Editor<br>Αθανάσιος Γρηγόριος<br>Υπαστυνόμος Α<br>"
+            "<center>Software Developer<br>Αθανάσιος Γρηγόριος<br>Υπαστυνόμος Α<br>"
             "Αστυνομικό Τμήμα Θεσσαλονίκης<br>Διεύθυνση Αστυνομίας Θεσσαλονίκης<br>Version 1.0<br>"
             "© 2025 All Rights Reserved</center>"
         )
@@ -46,21 +47,29 @@ class GunPos(QWidget):
         right_layout=QVBoxLayout()
         options= [
             "1. Αυτόφωρη διαδικασία κατοχής όπλου",
-            "2. Νομος περί όπλων και εκρηκτικών 2168/93"
+            "2. Νομος περί όπλων και εκρηκτικών 2168/93",
+            "3. ← Πίσω"
       ]
 
         for option in options:
             button = QPushButton(option)
+            button.setFixedSize(280,60)
             if option == "1. Αυτόφωρη διαδικασία κατοχής όπλου":
                 button.clicked.connect(self.open_case_1)
             elif option == "2. Νομος περί όπλων και εκρηκτικών 2168/93":
                 button.clicked.connect(self.open_case_2)
+            elif option == "3. ← Πίσω":
+                button.clicked.connect(self.open_case_3)
             else :
                 button.clicked.connect(lambda checked, opt=option : self.handle_option(opt))
             right_layout.addWidget(button)
 
         main_layout.addLayout(right_layout, 1)
         self.setLayout(main_layout)
+
+    def handle_option(self , option):
+        # Placeholder for other options (can be expanded later)
+        pass
 
     def open_case_1(self):
             self.case_1_window= Case1Window()
@@ -71,6 +80,17 @@ class GunPos(QWidget):
             self.case_2_window= GunLaw()
             self.case_2_window.show()
             self.hide()
+
+    def open_case_3(self):
+            self.go_back_to_start()
+
+    def go_back_to_start(self):
+        """Επιστροφή στην κύρια οθόνη"""
+        if self.parent_window:
+            self.parent_window.show()
+            self.parent_window.raise_()
+            self.parent_window.activateWindow()
+        self.hide()
 
 class Case1Window(QWidget):
     def __init__(self):
@@ -88,8 +108,8 @@ class Case1Window(QWidget):
         form_layout = QFormLayout()
         form_widget.setLayout(form_layout)
         scroll.setWidget(form_widget)
-        self.inputs={}
-        fields=[
+        self.inputs = {}
+        fields = [
             ("place", "Σε ποιο Αστυνομικό Τμήμα?"),
             ("date_num", "Ημερομηνία αριθμητικά?"),
             ("month", "Μήνας?"),
@@ -145,23 +165,7 @@ class Case1Window(QWidget):
             ("hourSeizure", "Ώρα έναρξης κατάσχεσης"),
             ("hourOfSeizureFinished", "Ώρα λήξης κατάσχεσης"),
             ("protocolnumber", "Αριθμός πρωτοκόλλου?"),
-            ("startTimeArrestReport", "Ώρα Έναρξης Έκθεσης Σύλληψης?"),
-            ("officer_arrest", "Αστυνομικός που τον συνέλαβε?"),
-            ("dateOfArrest", "Ημερομηνία Σύλληψης?"),
-            ("hourOfArrest", "Ώρα σύλληψης?"),
-            ("placeOfArrest", "Τοποθεσία σύλληψης?"),
-            ("endTimeOfReport", "Ώρα Λήξης Έκθεσης Σύλληψης?"),
-            ("start_time_rights", "Ώρα Έναρξης (Δικαιώματα)?"),
-            ("end_time_rights", "Ώρα περάτωσης (Δικαιώματα)?"),
-            ("date_num_apologia", "Ημερομηνία αριθμητικά (Απολογία)?"),
-            ("month_apologia", "Μήνας (Απολογία)?"),
-            ("year_apologia", "Έτος (Απολογία)?"),
-            ("day_apologia", "Ημέρα (Απολογία)?"),
-            ("start_hour_apologia", "Ώρα Έναρξης (Απολογία)?"),
-            ("question_rights_apologia", "Επιθυμείτε να κάνετε χρήση των δικαιωμάτων?"),
-            ("question_crime_apologia", "Κατηγορήθηκες άλλη φορά και για ποια αιτία?"),
-            ("question_crime_confess", "Τι απολογείσαι?"),
-            ("end_hour_apologia", "Ώρα περάτωσης (Απολογία)?")
+            c
 
 
         ]

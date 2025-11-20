@@ -6,6 +6,7 @@ from start import StartWindow
 from bodily_harm import BodilyHarmWindow
 from biowindow import BioWindow
 import os
+import webbrowser
 
 
 class MainWindow(QWidget):
@@ -25,6 +26,8 @@ class MainWindow(QWidget):
                 base_path = os.path.abspath(".")
             return os.path.join(base_path, relative_path)
 
+
+
         # Left side: Image and programmer info
         left_layout = QVBoxLayout()
         left_layout.setAlignment(Qt.AlignCenter)
@@ -37,7 +40,7 @@ class MainWindow(QWidget):
         left_layout.addWidget(self.image_label)
 
         programmer_info = QLabel(
-            "<center>Program Developer<br>Αθανασιάδης Γρηγόριος<br>Υπαστυνόμος Α<br>"
+            "<center>Software Developer<br>Αθανασιάδης Γρηγόριος<br>Υπαστυνόμος Α<br>"
             "Bsc Πληροφορική Ε.Α.Π<br> Msc Υπολογιστική Νοημοσύνη και Ψηφιακά Μέσα Α.Π.Θ <br>"
             "Αστυνομικό Τμήμα Θέρμης Θεσσαλονίκης<br>"
             "Διεύθυνση Αστυνομίας Θεσσαλονίκης<br>Version 2.0<br>© 2025 All Rights Reserved</center>"
@@ -46,14 +49,14 @@ class MainWindow(QWidget):
         left_layout.addWidget(programmer_info)
         main_layout.addLayout(left_layout, 1)
 
-        bio_button = QPushButton( "bio" )
+        bio_button = QPushButton("Γενικές Οδηγίες")
         bio_button.setFixedSize(150, 40)  # Μικρό κουμπί
         bio_button.clicked.connect(self.open_bio)
         left_layout.addWidget(bio_button,  alignment=Qt.AlignCenter)
 
-        dif_button = QPushButton("Σχετικά")
+        dif_button = QPushButton("Βιογραφικό")
         dif_button.setFixedSize(150, 40)  # Μικρό κουμπί
-        dif_button.clicked.connect(self.open_bio)
+        dif_button.clicked.connect(self.open_html_page)
         left_layout.addWidget(dif_button, alignment = Qt.AlignCenter )
 
         # Right side: Title
@@ -70,6 +73,17 @@ class MainWindow(QWidget):
         right_layout.addWidget(start_button, alignment=Qt.AlignCenter)
         main_layout.addLayout(right_layout, 1)
         self.setLayout(main_layout)
+
+    def open_html_page(self):
+        """Άνοιγμα HTML με σωστό path"""
+        html_file="index.html"
+        html_path=os.path.abspath(html_file)
+        # Έλεγχος αν υπάρχει το αρχείο
+        if os.path.exists(html_path):
+            webbrowser.open(f'file://{html_path}')
+        else:
+            print(f"Το αρχείο {html_file} δεν βρέθηκε!")
+       
 
     def open_start(self):
         self.start_window.show()

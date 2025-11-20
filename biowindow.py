@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import ( QWidget, QVBoxLayout,  QTextBrowser)
 class BioWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Βιογραφικό - Αθανασιάδης Γρηγόριος")
+        self.setWindowTitle("Γενικές Οδηγίες")
         self.setGeometry(200, 200, 600, 400)
 
         layout = QVBoxLayout()
@@ -20,33 +20,27 @@ class BioWindow(QWidget):
             </style>
         </head>
         <body>
-            <h1 style="color:blue;">Βιογραφικό - Αθανασιάδης Γρηγόριος</h1>
-            <p align="center">Ο Αθανασιάδης Γρηγόριος είναι Υπαστυνόμος Α στο Αστυνομικό Τμήμα Θέρμης Θεσσαλονίκης,
-             με πολυετή εμπειρία.</p>
-            <p><strong>Ακαδημαική Εκπαίδευση:</strong> 
-            <ol>
-                  <li style="color:blue;"> Πτυχίο Πληροφορικής, Ε.Α.Π.</li>
-                  <li style="color:blue;">Μεταπτυχιακός Τίτλος Σπουδών <br>Υπολογιστική Νοημοσύνη και<br>
-                   Ψηφιακά Μέσα-Α.Π.Θ</li>
-                </ol>
-             <p><strong>Μετεκπαίδευση:</strong> 
+            <h1 style="color:blue;">Γενικές Οδηγίες</h1>
+            <p align="center">Η εφαρμογή υλοποιήθηκε για την υποβοήθηση του έργου του Αξιωματικού Υπηρεσίας και την
+            τάχιστη περαίωση των αυτοφώρων και μηνύσεων με σκοπό την εξοικονομηση χρόνου.</p> 
+        
+             <p><strong>Γενικές Οδηγίες</strong> 
              <ol>
-             <li style="color:blue;">Google Cybersecurity Specialization <br>Coursera</li>
-             <li style="color:blue;">100 Days of Code: The Complete Python Pro Bootcamp - 
-            <br> Dr. Angela Yu -UDEMY</li>
-             <li style="color:blue;">Machine Learning A-Z: AI, Python & R + ChatGPT<br> Kirill Eremenko -UDEMY</li>
-             <li style="color:blue;">Complete Guide to TensorFlow for Deep Learning with Python
-              <br>Jose Portilla-UDEMY</li>
-              <li style="color:blue;">Master Computer Vision™ OpenCV4 in Python with Deep Learning
-              Master Computer Vision™ OpenCV4 like a pro while learning Dlib, Deep Learning Computer Vision <br>
-              (Keras, TensorFlow & Caffe) + 21 Projects! -UDEMY</li>
-              <li style="color:blue;">Face Detection -Master Open CV with Digital Image Processing<br> UDEMY
-              
-</li>
+             <li style="color:blue;">Στη μήνυση κατά αγνώστου με σωματικές βλάβες θα πρέπει να διορθώνεται στο 
+               word κείμενο τόσο στην Έκθεση Ενορκης Εξέτασης, όσο και στην ιατροδικαστική, στο ΒΑΣ και στο διαβιβαστικό 
+               καθώς στο Επώνυμο περνιέται ο άγνωστος δράστης και να σβήνονται τα του  και της   γεν.  στη  κατ.
+               ,αριθμός τηλεφώνου , ηλεκτρονικό  ταχυδρομείου, Α.Φ.Μ : , Δ.Ο.Υ :< </li>
+             <li style="color:blue;">Αν θελει ο χρήστης για τη βέλτιστη περαίωση ενός αυτοφώρου να απαντήσει άμεσα σε 
+             όλες τις ερωτήσεις. Τότε η εφαρμογή θα δημιουργήσει όλα τα απαραίτητα έγγραφα απευθείας και θα είναι μόνο
+              για  έλεγχο και υπογραφή. Μπορεί όμως να απαντήσει μόνο στις ερωτήσεις που αφορούν την Έκθεση Ένορκης 
+              Εξέτασης Μάρτυρα να πατήσει το κουμπί δημιουργία εγγράφων ώστε να δημιουργηθεί η ανωτέρω έκθεση και αφού
+              υπαγράψουν τα εμπλεκόμενα άτομα, να συνεχίσει με τις άλλες ερωτήσεις. Τα άλλα έγγραφα θα δημιουργηθούν 
+              και αυτά κενά στην αρχή και στην συνέχεια θα συμπληρωθούν με τις απαραίτητες απαντήσεις.</li>
+             
              </ol>
             
            </p>
-            <p><strong>Εργασιακή Εμπειρία:</strong> 29 χρόνια στην αστυνομία </p>
+         
             <p><strong>Επικοινωνία:</strong> g.athanasidis@astynomia.gr</p>
         </body>
         </html>

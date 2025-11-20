@@ -6,11 +6,13 @@ from documents import (witness_report, iatrodik, silipsi,deltio_kat, apologia, r
                        mutual, iatrodik_mutual, silipsi_mutual, deltio_kat_mutual, apologia_mutual,  context)
 import sys
 import os
+from lawwindow import HarmLaw
 
 
 class BodilyHarmWindow(QWidget):
-    def __init__(self):
+    def __init__(self, parent_window=None):
         super().__init__()
+        self.parent_window = parent_window
         self.setWindowTitle("Μήνυση με Σωματικές Βλάβες")
         self.setGeometry(100, 100, 800, 600)
 
@@ -34,7 +36,7 @@ class BodilyHarmWindow(QWidget):
         left_layout.addWidget(self.image_label)
 
         programmer_info = QLabel(
-            "<center>Program Editor<br>Αθανάσιος Γρηγόριος<br>Υπαστυνόμος Α<br>"
+            "<center>Software Developer<br>Αθανάσιος Γρηγόριος<br>Υπαστυνόμος Α<br>"
             "Αστυνομικό Τμήμα Θεσσαλονίκης<br>Διεύθυνση Αστυνομίας Θεσσαλονίκης<br>Version 1.0<br>"
             "© 2025 All Rights Reserved</center>"
         )
@@ -48,10 +50,13 @@ class BodilyHarmWindow(QWidget):
             "1. Μήνυση κατά αγνώστου",
             "2. Μήνυση με γνωστό δράστη?",
             "3. Μήνυση με γνωστό δράστη και σύλληψη?",
-            "4. Αλληλομήνυση"
+            "4. Αλληλομήνυση",
+            "5. Σχετικά άρθρα Π.Κ",
+            "6. ← Πίσω "
         ]
         for option in options:
             button = QPushButton(option)
+            button.setFixedSize(280,60)
             if option == "1. Μήνυση κατά αγνώστου":
                 button.clicked.connect(self.open_case_1)
             elif option == "2. Μήνυση με γνωστό δράστη?":
@@ -60,6 +65,10 @@ class BodilyHarmWindow(QWidget):
                 button.clicked.connect(self.open_case_3a)
             elif option == "4. Αλληλομήνυση":
                 button.clicked.connect(self.open_case_4)
+            elif option == "5. Σχετικά άρθρα Π.Κ":
+                button.clicked.connect(self.open_case_6)
+            elif option == "6. ← Πίσω ":
+                button.clicked.connect(self.open_case_5)
             else:
                 button.clicked.connect(lambda checked, opt=option: self.handle_option(opt))
             right_layout.addWidget(button)
@@ -92,11 +101,27 @@ class BodilyHarmWindow(QWidget):
         self.case_4_window.show()
         self.hide()
 
+    def open_case_6(self):
+        self.case_4_window = HarmLaw()
+        self.case_4_window.show()
+        self.hide()
+
+    def open_case_5(self):
+        self.go_back_to_start()
+
+    def go_back_to_start(self):
+        """Επιστροφή στην κύρια οθόνη"""
+        if self.parent_window:
+            self.parent_window.show()
+            self.parent_window.raise_()
+            self.parent_window.activateWindow()
+        self.hide()
+
 
 class Case1Window(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Μήνυση με Γνωστό Δράστη και Σύλληψη")
+        self.setWindowTitle("Μήνυση κατά αγνώστου")
         self.setGeometry(100, 100, 600, 800)
         self.context = context
         # Main layout
@@ -111,46 +136,46 @@ class Case1Window(QWidget):
         scroll.setWidget(form_widget)
 
         self.inputs = {}
-        fields = [
-            ("place" ,"Σε ποιο Αστυνομικό Τμήμα?") ,
-            ("date_num" ,"Ημερομηνία αριθμητικά?") ,
-            ("month" ,"Μήνας?") ,
-            ("year" ,"Έτος?") ,
-            ("day" ,"Ημέρα?") ,
-            ("hour" ,"Ώρα?") ,
-            ("first_officer" ,"1ος Ανακριτικός Υπάλληλος?") ,
-            ("policeStation" ,"Αστυνομικό Τμήμα?") ,
-            ("sec_officer" ,"2ος Ανακριτικός Υπάλληλος?") ,
-            ("surname" ,"Επώνυμο?") ,
-            ("name" ,"Όνομα?") ,
-            ("fathername" ,"Όνομα πατέρα?") ,
-            ("mothername" ,"Όνομα μητέρας?") ,
-            ("dateOfBirth" ,"Ημερομηνία Γέννησης?") ,
-            ("placeOfBirth" ,"Μέρος Γέννησης?") ,
-            ("address" ,"Διεύθυνση?") ,
-            ("tel" ,"Αριθμός τηλεφώνου?") ,
-            ("email" ,"Ηλεκτρονικό Ταχυδρομείο?") ,
-            ("DAT" ,"Δ.Α.Τ?") ,
-            ("issued" ,"Πότε εκδόθηκε?") ,
-            ("place_issued" ,"Που εκδόθηκε?") ,
-            ("afm" ,"Αριθμός ΑΦΜ?") ,
-            ("doy" ,"Δ.Ο.Υ?") ,
-            ("dateOfCrime" ,"Πότε-Ημερομηνία που έγινε το δίκημα?") ,
-            ("hourOfCrime" ,"Ακριβής ώρα αδικήματος?") ,
-            ("placeOfCrime" ,"Τοποθεσία αδικήματος?") ,
-            ("stateOfVictim" ,"Σε ποια κατάσταση βρισκόσουν?") ,
-            ("surnamePerperator" ,"(Σημείωσε) άγνωστο δράστη"),
-            ("whatHappened" ,"Τι έγινε?"),
-            ("howHappened" ,"Πώς έγινε?"),
-            ("whyHappened" ,"Γιατί έγινε?"),
-            ("add_something" ,"Θέλεις να προσθέσεις κάτι?"),
-            ("forensicExam" ,"Επιθυμείς ιατροδικαστική εξέταση?"),
-            ("prosecution" ,"Επιθυμείς την ποινική δίωξη του δράστη?"),
-            ("hourOfReportFinished" ,"Τι ώρα τελείωσε η έκθεση μάρτυρα?") ,
-            ("protocolnumber" ,"Αριθμός πρωτοκόλλου?") ,
-            ("placeOfHurt" ,"Πώς και πού προκλήθηκαν οι σωματικές βλάβες?")
+        fields = {
+            ("place", "Σε ποιο Αστυνομικό Τμήμα?"),
+            ("date_num", "Ημερομηνία αριθμητικά?"),
+            ("month", "Μήνας?"),
+            ("year", "Έτος?"),
+            ("day", "Ημέρα?"),
+            ("hour", "Ώρα?"),
+            ("first_officer", "1ος Ανακριτικός Υπάλληλος?"),
+            ("policeStation", "Αστυνομικό Τμήμα?"),
+            ("sec_officer", "2ος Ανακριτικός Υπάλληλος?"),
+            ("surname", "Επώνυμο?"),
+            ("name", "Όνομα?"),
+            ("fathername", "Όνομα πατέρα?"),
+            ("mothername", "Όνομα μητέρας?"),
+            ("dateOfBirth", "Ημερομηνία Γέννησης?"),
+            ("placeOfBirth", "Μέρος Γέννησης?"),
+            ("address", "Διεύθυνση?"),
+            ("tel", "Αριθμός τηλεφώνου?"),
+            ("email", "Ηλεκτρονικό Ταχυδρομείο?"),
+            ("DAT", "Δ.Α.Τ?"),
+            ("issued", "Πότε εκδόθηκε?"),
+            ("place_issued", "Που εκδόθηκε?"),
+            ("afm", "Αριθμός ΑΦΜ?"),
+            ("doy", "Δ.Ο.Υ?"),
+            ("dateOfCrime", "Πότε-Ημερομηνία που έγινε το δίκημα?"),
+            ("hourOfCrime", "Ακριβής ώρα αδικήματος?"),
+            ("placeOfCrime", "Τοποθεσία αδικήματος?"),
+            ("stateOfVictim", "Σε ποια κατάσταση βρισκόσουν?"),
+            ("surnamePerperator", "(Σημείωσε) άγνωστο δράστη"),
+            ("whatHappened", "Τι έγινε?"),
+            ("howHappened", "Πώς έγινε?"),
+            ("whyHappened", "Γιατί έγινε?"),
+            ("add_something", "Θέλεις να προσθέσεις κάτι?"),
+            ("forensicExam", "Επιθυμείς ιατροδικαστική εξέταση?"),
+            ("prosecution", "Επιθυμείς την ποινική δίωξη του δράστη?"),
+            ("hourOfReportFinished", "Τι ώρα τελείωσε η έκθεση μάρτυρα?"),
+            ("protocolnumber", "Αριθμός πρωτοκόλλου?"),
+            ("placeOfHurt", "Πώς και πού προκλήθηκαν οι σωματικές βλάβες?")
 
-        ]
+        }
         for key, label in fields:
             self.inputs[key] = QTextEdit()
             if key in ["place", "date_num", "month", "year", "day", "hour", "first_officer", "policeStation",
@@ -206,8 +231,8 @@ class Case1Window(QWidget):
                                     range(self.offences_list.count())]
         witness_report()
         iatrodik()
-        #vas ( )
-        #transmission ( )
+        vas()
+        transmission()
 
 
 class Case3aWindow(QWidget):
@@ -360,7 +385,7 @@ class Case3aWindow(QWidget):
 class Case2Window(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Μήνυση με Γνωστό Δράστη και Σύλληψη")
+        self.setWindowTitle("Μήνυση με Γνωστό Δράστη")
         self.setGeometry(100, 100, 600, 800)
         self.context = context
 
@@ -487,6 +512,9 @@ class Case2Window(QWidget):
         witness_report()
         iatrodik()
         deltio_kat()
+        vas()
+        transmission()
+
 
 
 class Case4Window(QWidget):
@@ -689,6 +717,14 @@ class Case4Window(QWidget):
                 self.context[key] = widget.text ( )
         self.context['offences'] = [self.offences_list.item ( i ).text ( ) for i in
                                     range ( self.offences_list.count ( ) )]
+        witness_report()
+        iatrodik()
+        silipsi()
+        deltio_kat()
+        apologia()
+        rights()
+        vas()
+        transmission()
         mutual()
         iatrodik_mutual()
         silipsi_mutual()

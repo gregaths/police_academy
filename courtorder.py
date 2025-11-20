@@ -10,8 +10,9 @@ import os
 
 
 class courtOrder(QWidget):
-    def __init__(self):
+    def __init__(self, parent_window=None):
         super().__init__()
+        self.parent_window=parent_window
         self.setWindowTitle("Μήνυση για Παραβίαση Δικαστικής Απόφασης")
         self.setGeometry(100, 100, 800, 600)
 
@@ -35,7 +36,7 @@ class courtOrder(QWidget):
             self.image_label.setPixmap(pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         left_layout.addWidget(self.image_label)
         programmer_info = QLabel(
-            "<center>Program Editor<br>Αθανάσιος Γρηγόριος<br>Υπαστυνόμος Α<br>"
+            "<center>Software Developer<br>Αθανάσιος Γρηγόριος<br>Υπαστυνόμος Α<br>"
             "Αστυνομικό Τμήμα Θεσσαλονίκης<br>Διεύθυνση Αστυνομίας Θεσσαλονίκης<br>Version 1.0<br>"
             "© 2025 All Rights Reserved</center>"
         )
@@ -49,16 +50,20 @@ class courtOrder(QWidget):
             "1. Μήνυση για παραβίαση της απόφασης",
             "2. Μήνυση με γνωστό δράστη και σύλληψη",
             "3. Άρθρο 169Α του Π.Κ - Ανάλυση",
+            "4. ← Πίσω"
         ]
 
         for option in options:
             button = QPushButton(option)
+            button.setFixedSize(280, 60)
             if option == "1. Μήνυση για παραβίαση της απόφασης":
                 button.clicked.connect(self.open_case_1)
             elif option == "2. Μήνυση με γνωστό δράστη και σύλληψη":
                 button.clicked.connect(self.open_case_2)
             elif option == "3. Άρθρο 169Α του Π.Κ - Ανάλυση":
                 button.clicked.connect(self.open_case_3a)
+            elif option == "4. ← Πίσω":
+                button.clicked.connect(self.open_case_4)
             else:
                 button.clicked.connect(lambda checked, opt=option: self.handle_option(opt))
             right_layout.addWidget(button)
@@ -83,6 +88,17 @@ class courtOrder(QWidget):
     def open_case_3a(self):
         self.case_3a_window = CourtOrder()
         self.case_3a_window.show()
+        self.hide()
+
+    def open_case_4(self):
+        self.go_back_to_start()
+
+    def go_back_to_start(self):
+        """Επιστροφή στην κύρια οθόνη"""
+        if self.parent_window:
+            self.parent_window.show()
+            self.parent_window.raise_()
+            self.parent_window.activateWindow()
         self.hide()
 
 class Case1Window(QWidget):

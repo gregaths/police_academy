@@ -8,6 +8,7 @@ from courtorder import courtOrder
 from gunlaw import GunPos
 from soundmeter import Sound
 from oblig import Obligation
+from complaint import Complaint
 import os
 import sys
 
@@ -16,7 +17,6 @@ class StartWindow(QWidget):
         super().__init__()
         self.setWindowTitle("ΒΟΗΘΟΣ ΑΞΥΠ - Επιλογές")
         self.setGeometry(200, 200, 800, 600)
-
         # Main layout (horizontal split)
         main_layout = QHBoxLayout()
 
@@ -40,13 +40,14 @@ class StartWindow(QWidget):
         left_layout.addWidget(self.image_label)
 
         programmer_info = QLabel(
-            "<center>Program Editor<br>Αθανασιάδης Γρηγόριος<br>Υπαστυνόμος Α<br>"
+            "<center>Software Developer<br>Αθανασιάδης Γρηγόριος<br>Υπαστυνόμος Α<br>"
             "Αστυνομικό Τμήμα Θέρμης Θεσσαλονίκης<br>Διεύθυνση Αστυνομίας Θεσσαλονίκης<br>Version 2.0<br>"
             "© 2025 All Rights Reserved</center>"
         )
         programmer_info.setAlignment(Qt.AlignCenter)
         left_layout.addWidget(programmer_info)
         main_layout.addLayout(left_layout, 1)
+
 
         # Right side: Buttons
         right_layout = QVBoxLayout()
@@ -77,39 +78,56 @@ class StartWindow(QWidget):
                 button.clicked.connect(self.open_courtordervio)
             elif button_text == "6. Παραβίαση Υποχρέωσης Διατροφής":
                 button.clicked.connect(self.open_oblig)
+            elif button_text == "7. Μήνυση Ιδιώτη":
+                button.clicked.connect(self.open_complaint)
             right_layout.addWidget(button)
 
         main_layout.addLayout(right_layout, 1)
         self.setLayout(main_layout)
 
     def open_bodily_harm(self):
-        self.bodily_window = BodilyHarmWindow()
+        if not hasattr(self,'bodily_window') or not self.bodily_window:
+            self.bodily_window = BodilyHarmWindow(parent_window = self)
         self.bodily_window.show()
         self.hide()
 
     def open_domesticvio(self):
-        self.domestic_window = DomesticVioWindow()
+        if not hasattr(self,'domestic_window') or not self.domestic_window:
+            self.domestic_window = DomesticVioWindow(parent_window = self)
         self.domestic_window.show()
         self.hide()
 
+
     def open_sound(self):
-        self.sound_window = Sound()
+        if not hasattr(self,'sound_window ') or not self.sound_window:
+            self.sound_window = Sound(parent_window=self)
         self.sound_window.show()
         self.hide()
 
+
     def open_courtordervio(self):
-        self.courtorder_window = courtOrder()
+        if not hasattr(self,'courtorder_window ') or not self.courtorder_window:
+            self.courtorder_window = courtOrder(parent_window=self)
         self.courtorder_window.show()
         self.hide()
 
     def open_gunpos(self):
-        self.gunpos_window = GunPos()
+        if not hasattr(self,'gunpos_window') or not self.gunpos_window:
+            self.gunpos_window = GunPos(parent_window = self)
         self.gunpos_window.show()
         self.hide()
 
     def open_oblig(self):
-        self.oblig_window = Obligation()
+        if not hasattr(self,'oblig_window ') or not self.oblig_window :
+            self.oblig_window = Obligation(parent_window=self)
         self.oblig_window.show()
         self.hide()
+
+    def open_complaint(self):
+        if not hasattr(self, 'complaint_window ') or not self.complaint_window:
+            self.complaint_window = Complaint(parent_window = self)
+        self.complaint_window.show()
+        self.hide()
+
 
 
