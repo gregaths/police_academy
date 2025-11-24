@@ -36,6 +36,7 @@ jobs:
       with:
         name: police-report-app
         path: dist/main.exe
+        retention-days: 7
     
     - name: Upload to release (if release event)
       if: github.event_name == 'release'
