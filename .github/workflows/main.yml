@@ -1,35 +1,49 @@
 name: Build Windows Executable
-on: [push, workflow_dispatch]
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  release:
+    types: [created]
 
 jobs:
   build:
     runs-on: windows-latest
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
     
-    - name: Set up Python
+    - name: Set up Python 3.8.8
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
-        
+        python-version: '3.8.8'
+    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        pip install PyQt5
-        pip install python-docx
-        pip install docxtpl
-        pip install openpyxl
-        pip install pillow
-        pip install requests
-        
-    - name: Build executable
+        pip install -r requirements.txt
+    
+    - name: Build executable with PyInstaller
       run: |
         pyinstaller --onefile --windowed --icon=favicon.ico --add-data "elas.jpg;." --hidden-import=PyQt5.QtCore --hidden-import=PyQt5.QtGui --hidden-import=PyQt5.QtWidgets --hidden-import=docx --hidden-import=docxtpl main.py
-        
-    - name: Upload executable
-      uses: actions/upload-artifact@v4
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
       with:
-        name: police-academy-exe
-        path: dist/
+        name: police-report-app
+        path: dist/main.exe
+    
+    - name: Upload to release (if release event)
+      if: github.event_name == 'release'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: dist/main.exe
+        asset_name: PoliceReportApp.exe
+        asset_content_type: application/vnd.microsoft.portable-executable
