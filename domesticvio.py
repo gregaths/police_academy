@@ -38,7 +38,7 @@ class DomesticVioWindow(QWidget):
 
         programmer_info = QLabel (
             "<center>Software Developer<br>Αθανάσιος Γρηγόριος<br>Υπαστυνόμος Α<br>"
-            "Αστυνομικό Τμήμα Θεσσαλονίκης<br>Διεύθυνση Αστυνομίας Θεσσαλονίκης<br>Version 1.0<br>"
+            "Αστυνομικό Τμήμα Θεσσαλονίκης<br>Διεύθυνση Αστυνομίας Θεσσαλονίκης<br>Version 2.0<br>"
             "© 2025 All Rights Reserved</center>"
         )
         programmer_info.setAlignment(Qt.AlignCenter)
