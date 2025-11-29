@@ -28,6 +28,7 @@ jobs:
         pyinstaller --onefile --windowed --icon=favicon.ico \
           --add-data "elas.jpg;." \
           --add-data "index.html;." \
+          --add-data "styles.css;." \
           --hidden-import=PyQt5.QtCore \
           --hidden-import=PyQt5.QtGui \
           --hidden-import=PyQt5.QtWidgets \
