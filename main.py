@@ -7,6 +7,7 @@ from bodily_harm import BodilyHarmWindow
 from biowindow import BioWindow
 import os
 import webbrowser
+from cv2 import cv2g
 
 
 class MainWindow(QWidget):
@@ -56,7 +57,8 @@ class MainWindow(QWidget):
 
         dif_button = QPushButton("Βιογραφικό")
         dif_button.setFixedSize(150, 40)  # Μικρό κουμπί
-        dif_button.clicked.connect(self.open_html_page)
+        #dif_button.clicked.connect(self.open_html_page)
+        dif_button.clicked.connect(self.open_cv2)
         left_layout.addWidget(dif_button, alignment = Qt.AlignCenter )
 
         # Right side: Title
@@ -93,6 +95,10 @@ class MainWindow(QWidget):
 
     def open_bio(self):
         self.bio_window =BioWindow()
+        self.bio_window.show()
+
+    def open_cv2(self):
+        self.bio_window = cv2g()
         self.bio_window.show()
 
     def relevant(self):
