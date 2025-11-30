@@ -28,12 +28,13 @@ class DomesticVioWindow(QWidget):
 
         # Left side: Image and programmer info
         left_layout=QVBoxLayout()
+        left_layout.setAlignment(Qt.AlignCenter)
         pixmap=QPixmap(resource_path("elas.jpg"))
         if pixmap.isNull():
             self.image_label = QLabel("Εικόνα elas.jpg δεν βρέθηκε")
         else:
             self.image_label = QLabel()
-            self.image_label.setPixmap(pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            self.image_label.setPixmap(pixmap.scaled(400, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         left_layout.addWidget(self.image_label)
 
         programmer_info = QLabel (

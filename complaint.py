@@ -28,6 +28,7 @@ class Complaint(QWidget):
 
         # Left side: Image and programmer info
         left_layout=QVBoxLayout()
+        left_layout.setAlignment(Qt.AlignCenter)
         pixmap=QPixmap(resource_path("elas.jpg"))
         if pixmap.isNull():
             self.image_label=QLabel("Εικόνα elas.jpg δεν βρέθηκε")
