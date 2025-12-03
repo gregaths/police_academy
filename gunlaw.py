@@ -166,7 +166,7 @@ class Case1Window(QWidget):
             ("hourSeizure", "Ώρα έναρξης κατάσχεσης"),
             ("hourOfSeizureFinished", "Ώρα λήξης κατάσχεσης"),
             ("protocolnumber", "Αριθμός πρωτοκόλλου?"),
-            c
+            
 
 
         ]
